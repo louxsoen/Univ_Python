@@ -33,6 +33,7 @@ arr[2] : 오존지수
 '''
 
 
+
 print('현재 위치는 {}입니다'.format(location))
 print('온도는 {}도 라서 ~합니다.'.format(temp))
 print(dust)
