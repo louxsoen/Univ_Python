@@ -63,7 +63,7 @@ minidust_list = cut.findall("\d+", minidust) # 초미세먼지 단위 제거
 minidust_num = int(minidust_list[0]) # 자료형 스카우트
 
 #---------------------------------------------------------------# 시간 정보 가져오기 (크롤링)
-'''def googletime():
+def googletime():
     local_year = time.strftime('%Y')
     local_month = time.strftime('%m')
     local_day = time.strftime('%d')
@@ -73,14 +73,6 @@ minidust_num = int(minidust_list[0]) # 자료형 스카우트
 
     print('컴퓨터 시간 | {}년 {}월 {}일 {}시 {}분 {}초'.format(local_year, local_month, local_day, local_hour, local_min, local_sec))
 
-    html = requests.get('https://search.naver.com/search.naver?query=날씨') # 네이버 날씨 HTML주소
-
-box_weather = bus(html.text, 'html.parser') # 날씨 박스
-css_weather = box_weather.find('div', {'class': 'weather_box'})
-
-    bs=BeautifulSoup(url_open,'html.parser')
-    print(bs.html)
-    '''
 #---------------------------------------------------------------# weather str 설정
 
 if dust_num <= 30: # 미세먼지 수치별 상태를 dust_str에 저장
