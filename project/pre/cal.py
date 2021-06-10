@@ -65,6 +65,3 @@ def all():
 
         except: break
 
-
-print("adf")
-all()
