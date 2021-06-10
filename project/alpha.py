@@ -1,12 +1,15 @@
 import requests
 import re as cut
+import os
+import math
 from bs4 import BeautifulSoup as bs
+
 
 #---------------------------------------------------------------# 날씨 정보 가져오기 (크롤링)
 
-html = requests.get('https://search.naver.com/search.naver?query=날씨')
+html = requests.get('https://search.naver.com/search.naver?query=날씨') # 정보를 가져올 HTML주소
 
-box_weather = bs(html.text, 'html.parser')
+box_weather = bs(html.text, 'html.parser') 
 css_weather = box_weather.find('div', {'class': 'weather_box'})
 
 location = css_weather.find('span', {'class':'btn_select'}).text
@@ -89,6 +92,7 @@ elif temp_num > 32:
 
 temp_type = "섭씨" # 섭씨 화씨 구분 추가 예
 user_name = "이서준"
+ex_name = user_name
 
 #---------------------------------------------------------------# 날씨 정보 (1)
 def info():
@@ -99,28 +103,68 @@ def info():
     print('초미세먼지 농도는 {}이며 {}'.format(minidust, minidust_str))
     print('오존 수치는 {}'.format(ozone))
 
+#---------------------------------------------------------------# 사칙 연산 계산기 (3)
+
+
+#---------------------------------------------------------------# GCD계산기 (4)
+def divisor(a, b):
+    print('GCD계산기 | GCD(Grestest Common Divisor은 두 수의 최대공약수를 지칭합니다.')
+
+    a, b = b, a # swtich
+
+    c = math.gcd(a, b)
+    div_a = []
+    div_b = []
+    
+    print('Gcd({}, {}) = {}'.format(a, b, c))
+
+    for i in range(1, a):
+        if a % i == 0:
+            div_a.append(i)
+    
+    for i in range(1, b):
+        if b % i == 0:
+            div_b.append(i)
+
+    print('{}의 약수 {}'.format(a, div_a))
+    print('{}의 약수 {}'.format(b, div_b))
+
 #---------------------------------------------------------------# 메인함수 (-1)
+def cls():
+    console_clear = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+    console_clear()
+
 while True:
     while True:
         try:
-            value = int(input('원하시는 서비스 항목을 선택해주세요.'))
-            print("1 ) 날씨 정보 확인하기")
-            print("2 ) 현재 시간 확인하기")
-            
-
+            value = int(input('\n메인화면 | 원하시는 서비스 항목을 선택해주세요.\n1 ) 날씨 정보 확인하기 \n2 ) 현재 시간 확인하기\n3 ) 사칙연산 계산기\n4 ) GCD 계산기\n5 ) 사용자 이름 변경 \n0 ) 종료\n'))
             break
         except ValueError:
-            print("숫자만 입력해주세요.")
+            cls()
+            print("입력 오류 | 숫자만 입력해주세요.")
 
-    if value == 1:
-        info()
     if value == 0:
+        cls()
+        print('S- OS를 종료합니다. 감사합니다.')
+        break
+    elif value == 1:
+        cls()
+        info()
+    elif value == 3:
+        cls()
+        cal_input = input('사칙 연산 계산기 | 식을 작성해주세요. \'ex : 51 + 34\'')
         
-        ex_name = user_name
-        user_name = input("사용자 이름을 입력하시오.")
+    elif value == 4:
+        cls()
+        a = int(input('정수 a를 입력하시오. : '))
+        b = int(input('정수 b를 입력하시오. : '))
+        divisor(a, b)
+    elif value == 5:
+        cls()
+        user_name = input("새로운 사용자의 이름을 입력하시오. (현재 사용자 : {})\n".format(user_name))
         print('사용자 이름이 {}님에서 {}님으로 변경되었습니다.'.format(ex_name, user_name))
-
-
+        
+    
 
 '''
 num으로 처리된 항목들
