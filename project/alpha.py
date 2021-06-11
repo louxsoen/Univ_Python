@@ -205,7 +205,6 @@ def all():
             break
 
 #---------------------------------------------------------------# GCD계산기 (4)
-
 def divisor(): # GCD 계산 및 DIVISOR 확인
 
     print('GCD계산기 | GCD(Grestest Common Divisor)는 두 수의 최대공약수를 지칭합니다.')
@@ -213,9 +212,18 @@ def divisor(): # GCD 계산 및 DIVISOR 확인
     while True:
         try:
             a = int(input('정수 a를 입력하시오. : '))
-            b = int(input('정수 b를 입력하시오. : '))
+            if(a == 0):
+                print('0을 입력하셨으므로 프로그램을 종료합니다.')
+                break
+           
+            b = int(input('정수 b를 입력하시오. : '))  
+            if(b == 0):
+                print('0을 입력하셨으므로 프로그램을 종료합니다.')
+                break
+            
         except ValueError:
             print('잘못된 값을 입력하셨습니다.')
+            break
         
         if (a == 0) | (b == 0):
             print('GCD 프로그램을 종료합니다.')
@@ -229,11 +237,11 @@ def divisor(): # GCD 계산 및 DIVISOR 확인
         
         print('Gcd({}, {}) = {}'.format(a, b, c))
 
-        for i in range(1, a): # a 약수 추가
+        for i in range(1, a+1): # a 약수 추가
             if a % i == 0:
                 div_a.append(i)
         
-        for i in range(1, b): # b 약수 추가
+        for i in range(1, b+1): # b 약수 추가
             if b % i == 0:
                 div_b.append(i)
 

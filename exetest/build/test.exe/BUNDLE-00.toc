@@ -1,3 +1,0 @@
-([('test.exe',
-   '/Users/louxsoen/Documents/GitHub/Univ_Python/exetest/dist/test.exe',
-   'EXECUTABLE')],)
