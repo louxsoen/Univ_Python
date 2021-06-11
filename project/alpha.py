@@ -190,27 +190,40 @@ def all():
 
 #---------------------------------------------------------------# GCD계산기 (4)
 
-def divisor(a, b): # GCD 계산 및 DIVISOR 확인
+def divisor(): # GCD 계산 및 DIVISOR 확인
+
     print('GCD계산기 | GCD(Grestest Common Divisor)는 두 수의 최대공약수를 지칭합니다.')
 
-    a, b = b, a # 두 수 스위치
+    while True:
+        try:
+            a = int(input('정수 a를 입력하시오. : '))
+            b = int(input('정수 b를 입력하시오. : '))
+        except ValueError:
+            print('잘못된 값을 입력하셨습니다.')
+        
+        if (a == 0) | (b == 0):
+            print('GCD 프로그램을 종료합니다.')
+            break
 
-    c = math.gcd(a, b) # c는 GCD 결과값
-    div_a = []
-    div_b = []
-    
-    print('Gcd({}, {}) = {}'.format(a, b, c))
+        a, b = b, a # 두 수 스위치
 
-    for i in range(1, a): # a 약수 추가
-        if a % i == 0:
-            div_a.append(i)
-    
-    for i in range(1, b): # b 약수 추가
-        if b % i == 0:
-            div_b.append(i)
+        c = math.gcd(a, b) # c는 GCD 결과값
+        div_a = []
+        div_b = []
+        
+        print('Gcd({}, {}) = {}'.format(a, b, c))
 
-    print('{}의 약수 {}'.format(a, div_a))
-    print('{}의 약수 {}'.format(b, div_b))
+        for i in range(1, a): # a 약수 추가
+            if a % i == 0:
+                div_a.append(i)
+        
+        for i in range(1, b): # b 약수 추가
+            if b % i == 0:
+                div_b.append(i)
+
+        print('{}의 약수 {}'.format(a, div_a))
+        print('{}의 약수 {}'.format(b, div_b))
+        print('종료하려면 0을 입력하십시오.')
 
 #---------------------------------------------------------------# 콘솔 클린하게 해주는 함수
 
@@ -246,9 +259,7 @@ while True:
         
     elif value == 4: # gcd 계산기 연산
         cls()
-        a = int(input('정수 a를 입력하시오. : '))
-        b = int(input('정수 b를 입력하시오. : '))
-        divisor(a, b)
+        divisor()
     elif value == 5: # 사용자 이름 변경
         cls()
         user_name = input("새로운 사용자의 이름을 입력하시오. (현재 사용자 : {})\n".format(user_name))
