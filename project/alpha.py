@@ -52,15 +52,31 @@ dust = arr[0].find('span', {'class':'num'}).text # 미세먼지
 minidust = arr[1].find('span', {'class':'num'}).text 
 ozone = arr[2].find('span', {'class':'num'}).text
 
+
 #---------------------------------------------------------------# 날씨 정보 단위 제거 및 자료형 스카우트
 
-temp_num = int(temp) # temp가 문자 변수여서 int형으로 스카우트
-
 dust_list = cut.findall("\d+", dust) # 단위까지 붙은 미세먼지 변수에서 숫자만 출력
-dust_num = int(dust_list[0]) # 자료형 스카우트
-
 minidust_list = cut.findall("\d+", minidust) # 초미세먼지 단위 제거
-minidust_num = int(minidust_list[0]) # 자료형 스카우트
+
+# 네이버 날씨에 정보가 없을 경우 프로그램 오류가 나는 것을 확인 재발 방지
+try: 
+    temp_num = int(temp) # temp가 문자 변수여서 int형으로 스카우트
+except:
+    print('온도 수치를 가져올 수 없습니다.')
+    temp_num = "--"
+
+try:
+    dust_num = int(dust_list[0]) # 자료형 스카우트
+except:
+    print('미세먼지 수치를 가져올 수 없습니다.')
+    dust_num = "정보 없음"
+
+try:
+    minidust_num = int(minidust_list[0]) # 자료형 스카우트
+except:
+    print('초미세먼지 수치를 가져올 수 없습니다.')
+    minidust = "정보 없음"
+
 
 #---------------------------------------------------------------# 시간 정보 가져오기 (크롤링)
 def googletime():
