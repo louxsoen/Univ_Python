@@ -34,6 +34,7 @@ def check(list):
             bingo+=1
         if i%5==4:#줄마다 체크개수 초기화
             temp=0
+            
     for i in range(5):#세로줄마다 체크숫자 저장하기
         for p in range(5):
             if list[i+p*5]==0:#체크이면 체크수를 1증가
@@ -41,6 +42,19 @@ def check(list):
         if temp==5:#1줄에 체크가 5개면 빙고개수 증가
             bingo+=1
         temp=0
+    temp=0
+
+    for i in range(5):#오른쪽대각선줄마다 체크숫자 저장하기
+        if list[i*6]==0:#체크이면 체크수를 1증가
+                temp+=1
+        if temp==5:#1줄에 체크가 5개면 빙고개수 증가
+            bingo+=1
+    temp=0
+    for i in range(5):#오른쪽대각선줄마다 체크숫자 저장하기
+        if list[4+4*i]==0:#체크이면 체크수를 1증가
+                temp+=1
+        if temp==5:#1줄에 체크가 5개면 빙고개수 증가
+            bingo+=1
     return bingo#빙고 개수 반환
 
 def AI(list):
@@ -48,6 +62,7 @@ def AI(list):
     garo=[]#가로줄에서 체크된숫자를 저장
     sero=[]#세로줄마다 체크된 숫자를 저장
     priority=[]#우선순위
+    cross=[]
     result=0#최대 우선순위
     for i in range(25):#가로줄마다 체크숫자 저장하기
         if list[i]==0:#체크이면 체크수를 1증가
@@ -62,18 +77,48 @@ def AI(list):
                 temp+=1
         sero.append(temp)
         temp=0
+        
+    temp=0
+    for i in range(5):#오른쪽대각선마다 체크된것 추가하기
+        if computer[i*6]==0:
+            temp+=1
+    cross.append(temp)
+    temp=0
+    
+    for i in range(5):#왼쪽대각선마다 체크된것 추가하기
+        if computer[4+4*i]==0:
+            temp+=1
+    cross.append(temp)    
     for i in range(25):#우선순위를 0으로 초기화
         priority.append(0)
         
     for i in range(5):#가로에 대한 우선순위
         for p in range(5):
             if computer[p+i*5] !=0:
-                priority[p+i*5]+=garo[i]
+                if garo [i]==4:
+                    priority[p+i*5]+=100
+                else:
+                    priority[p+i*5]+=garo[i]
+
 
     for i in range(5):#세로에 대한 우선순위
         for p in range(5):
             if computer[i+p*5]!=0:
-                priority[i+p*5]+=sero[i]
+                if sero[i]==4:
+                    priority[i+p*5]+=100
+                else:
+                    priority[i+p*5]+=sero[i]
+    for i in range(5):
+        if computer[6*i]!=0:#오른쪽 대각선 우선순위 주기
+            if cross[0]==4:
+                priority[i*6]+=100
+            else:
+                priority[i*6]+=cross[0]
+        if computer[4+4*i]!=0:#왼쪽 대각선 우선순위주기
+            if cross[1]==4:
+                priority[4+4*i]+=100
+            else:
+                priority[4+4*i]+=cross[1]
 
     for i in range(25):
         if result<=priority[i]:
@@ -96,6 +141,16 @@ for i in range(25):#computer의 빙고판에 숫자를 채워넣는다.
 
 while 1:
     show()#현재 빙고판의 상태를 보여준다.
+    if   check(player)>=5 and check(computer)>=5:
+        print("무승부")
+        break
+    elif check(player)>=5:
+        print("player win~~~~~~~~~~~~~~")
+        break
+    elif check(computer)>=5:
+        print("computer win~~~~~~~~~~~~~~")
+        break
+    print('================================')
     if turn%2==1:#turn이 홀수일때는 player의 턴이다.
         print("\n플레이의 턴입니다.")
         while 1:
@@ -119,16 +174,5 @@ while 1:
         player[player.index(computer[AI(computer)])]=0
         computer[AI(computer)]=0
     print("턴종료")
-    if   check(player)>=5 and check(computer)>=5:
-        print("무승부")
-        break
-    elif check(player)>=5:
-        print("player win~~~~~~~~~~~~~~")
-        break
-    elif check(computer)>=5:
-        print("computer win~~~~~~~~~~~~~~")
-        break
-    print('================================')
     turn+=1
-
-from multiprocessing import Queue
+    
