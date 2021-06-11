@@ -1,3 +1,0 @@
-([('alpha',
-   '/Users/louxsoen/Documents/GitHub/Univ_Python/project/dist/alpha',
-   'EXECUTABLE')],)
