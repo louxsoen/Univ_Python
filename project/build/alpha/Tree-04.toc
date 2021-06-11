@@ -1,0 +1,5 @@
+('/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/beautifulsoup4-4.9.3-py3.9.egg',
+ None,
+ {'*.py', '*.cpython-39-darwin.so', 'EGG-INFO', '*.pyc', '*.so', '*.abi3.so'},
+ 'DATA',
+ [])
