@@ -288,6 +288,7 @@ while True:
         cls()
         user_name = input("새로운 사용자의 이름을 입력하시오. (현재 사용자 : {})\n".format(user_name))
         print('사용자 이름이 {}님에서 {}님으로 변경되었습니다.'.format(ex_name, user_name))
+        ex_name = user_name
         
     
 
